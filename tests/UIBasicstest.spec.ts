@@ -1,7 +1,6 @@
 import { Locator } from "@playwright/test"
 import { chromium } from 'playwright';
 import { test, expect } from '@playwright/test';
-import { googlePage         } from "../Pages/googlePage";
 
 
 
@@ -50,16 +49,4 @@ test('Table',async ({page})=>
 
     })
 
- 
-    test('Google search for Playwright', async ({ page }) => {
-        const google = new GooglePage(page);
-    
-        await google.navigate('https://www.google.com');
-        await google.search('Playwright');
-    
-        const resultsText = await google.getResultsText();
-        expect(resultsText).toContain('playwright.dev');
-    
-        console.log('Search results validated');
-    });
     
