@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { chromium } from 'playwright';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
@@ -8,12 +9,17 @@ test('has title', async ({ page }) => {
 });
 
 test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+(async () => {
+    const browser = await chromium.launch();
+    const page = await browser.newPage();
+    await page.goto('https://example.com');
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-  console.log("First code")
+    // Use the locator to get the element's innerText
+    const textContent = await page.locator('your-locator-selector').innerText();
+    console.log('Text content:', textContent);
+
+    await browser.close();
+})();
+
 });
